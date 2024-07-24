@@ -12,8 +12,9 @@
         <table id="standings-table">
             <thead>
                 <tr>
-                    <th>Classificação</th>
+                    <th></th>
                     <th>Equipe</th>
+                    <th>Histórico</th>
                     <th>Jogos</th>
                     <th>Vitórias</th>
                     <th>Empates</th>
@@ -21,7 +22,6 @@
                     <th>GP</th>
                     <th>GC</th>
                     <th>SG</th>
-                    <th>Histórico</th>
                     <th>Pontos</th>
                 </tr>
             </thead>
@@ -98,7 +98,7 @@
             const colors = {
                 'W': 'green',
                 'L': 'red',
-                'D': 'white'
+                'D': 'gray'
             };
 
             return form.split(',').map(char => {
