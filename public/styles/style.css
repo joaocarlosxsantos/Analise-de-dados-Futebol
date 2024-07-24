@@ -14,6 +14,7 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Ensure that any overflow is contained */
 }
 
 h1 {
@@ -26,7 +27,6 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    overflow-x: auto; /* Add horizontal scroll for small screens */
 }
 
 th, td {
@@ -87,7 +87,8 @@ td:last-child {
 
     table {
         font-size: 14px;
-        overflow-x: auto; /* Ensure horizontal scroll for table */
+        overflow-x: auto; /* Ensure horizontal scroll for the table */
+        display: block;   /* Ensure table behaves like a block element for scrolling */
     }
 
     th, td {
