@@ -1,11 +1,10 @@
 import express from 'express';
-import fetch from 'node-fetch';
+import { getLast3DaysMatches } from './api/last-3-days.js';
+import { getTodayMatches } from './api/today.js';
+import { getNext3DaysMatches } from './api/next-3-days.js';
 
 const app = express();
 const port = process.env.PORT || 3000;  // Vercel irá definir automaticamente a porta
-
-const apiUrl = 'https://api.football-data.org/v4/competitions/BSA/standings?season=2024';
-const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -16,18 +15,22 @@ app.use((req, res, next) => {
 
 app.get('/standings', async (req, res) => {
     try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch('https://api.football-data.org/v4/competitions/BSA/standings?season=2024', {
             headers: {
-                'X-Auth-Token': apiKey
+                'X-Auth-Token': '0375969d79f74b60a0a9d73904aa1ee1'
             }
         });
         const data = await response.json();
         res.json(data);
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching standings:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+app.get('/api/last-3-days', getLast3DaysMatches);
+app.get('/api/today', getTodayMatches);
+app.get('/api/next-3-days', getNext3DaysMatches);
 
 app.use(express.static('public'));
 
