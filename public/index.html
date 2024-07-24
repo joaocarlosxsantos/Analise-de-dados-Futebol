@@ -78,7 +78,7 @@
                     row.appendChild(goalDifference);
 
                     const form = document.createElement('td');
-                    form.textContent = team.form;
+                    form.innerHTML = generateFormDots(team.form);
                     row.appendChild(form);
 
                     const points = document.createElement('td');
