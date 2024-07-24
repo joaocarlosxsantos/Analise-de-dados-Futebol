@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 });
 
 // API routes
-app.get('/standings', async (req, res) => {
+app.get('/api/standings', async (req, res) => {
     try {
         const response = await fetch('https://api.football-data.org/v4/competitions/BSA/standings?season=2024', {
             headers: {
