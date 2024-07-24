@@ -1,18 +1,32 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/standings.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "public/**",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      { "src": "/api/standings", "dest": "/api/standings.js" },
-      { "src": "/(.*)", "dest": "/public/$1" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/standings.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/last-3-days.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/today.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/next-3-days.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/standings", "dest": "/api/standings.js" },
+    { "src": "/api/last-3-days", "dest": "/api/last-3-days.js" },
+    { "src": "/api/today", "dest": "/api/today.js" },
+    { "src": "/api/next-3-days", "dest": "/api/next-3-days.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
+}
