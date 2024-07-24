@@ -16,7 +16,7 @@ export async function getTodayMatches(req, res) {
         const data = await response.json();
         res.json(data);
     } catch (error) {
-        console.error('Error fetching today\'s matches:', error);
+        console.error('Error fetching todays matches:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
