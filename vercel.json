@@ -12,7 +12,7 @@
     ],
     "routes": [
       { "src": "/api/standings", "dest": "/api/standings.js" },
-      { "src": "/(.*)", "dest": "/public/index.html" }
+      { "src": "/(.*)", "dest": "/public/$1" }
     ]
   }
   
