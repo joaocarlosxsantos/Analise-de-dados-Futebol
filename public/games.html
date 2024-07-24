@@ -34,8 +34,24 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/api/last-3-days')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'last-3-days-list'))
+                .catch(error => console.error('Error loading last 3 days games:', error));
 
-function renderGames(data, elementId) {
+            fetch('/api/today')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'today-list'))
+                .catch(error => console.error('Error loading today\'s games:', error));
+
+            fetch('/api/next-3-days')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'next-3-days-list'))
+                .catch(error => console.error('Error loading next 3 days games:', error));
+        });
+
+        function renderGames(data, elementId) {
             const gamesList = document.getElementById(elementId);
             gamesList.innerHTML = '';
 
@@ -53,7 +69,9 @@ function renderGames(data, elementId) {
 
                 const score = document.createElement('div');
                 score.className = 'score';
-                score.textContent = `${match.score.fullTime.home} - ${match.score.fullTime.away}`;
+                score.textContent = match.score.fullTime.home !== null && match.score.fullTime.away !== null
+                    ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
+                    : 'Em andamento';
 
                 card.appendChild(homeTeam);
                 card.appendChild(awayTeam);
@@ -62,22 +80,6 @@ function renderGames(data, elementId) {
                 gamesList.appendChild(card);
             });
         }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('/api/last-3-days')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'last-3-days-list'));
-
-            fetch('/api/today')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'today-list'));
-
-            fetch('/api/next-3-days')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'next-3-days-list'));
-        });
-
-        
     </script>
 </body>
 </html>
