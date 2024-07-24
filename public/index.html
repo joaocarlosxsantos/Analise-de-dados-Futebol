@@ -49,6 +49,10 @@
                     name.textContent = `${team.team.tla} - ${team.team.shortName}`;
                     row.appendChild(name);
 
+                    const form = document.createElement('td');
+                    form.innerHTML = generateFormDots(team.form);
+                    row.appendChild(form);
+
                     const playedGames = document.createElement('td');
                     playedGames.textContent = team.playedGames;
                     row.appendChild(playedGames);
@@ -77,9 +81,6 @@
                     goalDifference.textContent = team.goalDifference;
                     row.appendChild(goalDifference);
 
-                    const form = document.createElement('td');
-                    form.innerHTML = generateFormDots(team.form);
-                    row.appendChild(form);
 
                     const points = document.createElement('td');
                     points.textContent = team.points;
