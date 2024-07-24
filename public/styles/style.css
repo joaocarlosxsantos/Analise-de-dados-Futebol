@@ -57,7 +57,7 @@ td:first-child {
     font-weight: bold;
 }
 
-td:last-child {
+td:nth-child(3) {
     font-weight: bold;
 }
 
