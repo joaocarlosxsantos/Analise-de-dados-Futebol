@@ -26,6 +26,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    overflow-x: auto; /* Add horizontal scroll for small screens */
 }
 
 th, td {
@@ -68,16 +69,45 @@ td:last-child {
     margin: 0 2px;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .container {
+        padding: 15px;
     }
 
+    table, th, td {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
     .container {
         padding: 10px;
     }
 
-    table, th, td {
+    table {
         font-size: 14px;
+        overflow-x: auto; /* Ensure horizontal scroll for table */
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    table, th, td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
     }
 }
