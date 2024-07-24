@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos Brasileirão Série A 2024</title>
+    <link rel="icon" href="/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="/">Tabela</a></li>
+                <li><a href="/games.html">Jogos</a></li>
+            </ul>
+        </nav>
+        <h1>Jogos Brasileirão Série A 2024</h1>
+        
+        <section id="last-3-days">
+            <h2>Jogos dos Últimos 3 Dias</h2>
+            <div class="games-list" id="last-3-days-list"></div>
+        </section>
+        
+        <section id="today">
+            <h2>Jogos de Hoje</h2>
+            <div class="games-list" id="today-list"></div>
+        </section>
+        
+        <section id="next-3-days">
+            <h2>Jogos dos Próximos 3 Dias</h2>
+            <div class="games-list" id="next-3-days-list"></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchGames('2024-07-21', '2024-07-23', 'last-3-days-list');
+            fetchGames('2024-07-24', '2024-07-24', 'today-list');
+            fetchGames('2024-07-25', '2024-07-27', 'next-3-days-list');
+        });
+
+        function fetchGames(dateFrom, dateTo, elementId) {
+            fetch(`https://api.football-data.org/v4/competitions/BSA/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED`, {
+                headers: {
+                    'X-Auth-Token': '0375969d79f74b60a0a9d73904aa1ee1'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const gamesList = document.getElementById(elementId);
+                gamesList.innerHTML = '';
+
+                data.matches.forEach(match => {
+                    const card = document.createElement('div');
+                    card.className = 'game-card';
+
+                    const homeTeam = document.createElement('div');
+                    homeTeam.className = 'team';
+                    homeTeam.innerHTML = `<img src="${match.homeTeam.crest}" alt="${match.homeTeam.name} crest" class="team-crest"> ${match.homeTeam.name}`;
+
+                    const awayTeam = document.createElement('div');
+                    awayTeam.className = 'team';
+                    awayTeam.innerHTML = `<img src="${match.awayTeam.crest}" alt="${match.awayTeam.name} crest" class="team-crest"> ${match.awayTeam.name}`;
+
+                    const score = document.createElement('div');
+                    score.className = 'score';
+                    score.textContent = `${match.score.fullTime.home} - ${match.score.fullTime.away}`;
+
+                    card.appendChild(homeTeam);
+                    card.appendChild(awayTeam);
+                    card.appendChild(score);
+
+                    gamesList.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching games:', error);
+            });
+        }
+    </script>
+</body>
+</html>

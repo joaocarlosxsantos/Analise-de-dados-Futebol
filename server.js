@@ -29,12 +29,14 @@ app.get('/standings', async (req, res) => {
     }
 });
 
-// Servir arquivos estáticos da pasta 'public'
 app.use(express.static('public'));
 
-// Rota para servir o arquivo 'index.html'
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/games.html', (req, res) => {
+    res.sendFile(__dirname + '/public/games.html');
 });
 
 app.listen(port, () => {

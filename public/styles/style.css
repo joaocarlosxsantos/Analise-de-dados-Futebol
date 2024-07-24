@@ -14,7 +14,35 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Ensure that any overflow is contained */
+    overflow-x: auto;
+}
+
+nav {
+    background-color: #004d61;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
 }
 
 h1 {
@@ -68,8 +96,67 @@ td:nth-child(4) {
     border-radius: 50%;
     margin: 0 2px;
 }
+nav {
+    background-color: #004d61;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 
-/* Responsive styles */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.game-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.team-crest {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.score {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 1024px) {
     .container {
         padding: 15px;
@@ -87,8 +174,8 @@ td:nth-child(4) {
 
     table {
         font-size: 14px;
-        overflow-x: auto; /* Ensure horizontal scroll for the table */
-        display: block;   /* Ensure table behaves like a block element for scrolling */
+        overflow-x: auto;
+        display: block;
     }
 
     th, td {
@@ -112,3 +199,4 @@ td:nth-child(4) {
         height: 8px;
     }
 }
+
