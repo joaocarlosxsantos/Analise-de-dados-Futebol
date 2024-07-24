@@ -45,7 +45,7 @@
                     row.appendChild(position);
 
                     const name = document.createElement('td');
-                    name.textContent = team.team.name;
+                    name.textContent = `${team.team.tla} - ${team.team.shortName}`;
                     row.appendChild(name);
 
                     const playedGames = document.createElement('td');
