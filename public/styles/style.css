@@ -60,6 +60,14 @@ td:last-child {
     font-weight: bold;
 }
 
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 2px;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 10px;

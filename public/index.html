@@ -92,6 +92,21 @@
                 console.error('Error fetching data:', error);
             });
         });
+
+        function generateFormDots(form) {
+            // Create a mapping for each character to its corresponding color
+            const colors = {
+                'W': 'green',
+                'L': 'red',
+                'D': 'white'
+            };
+
+            return form.split(',').map(char => {
+                const color = colors[char.trim()];
+                return color ? `<span class="dot" style="background-color: ${color};"></span>` : '';
+            }).join(' ');
+        }
+        
     </script>
 </body>
 </html>
