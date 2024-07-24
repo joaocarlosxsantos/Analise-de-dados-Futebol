@@ -18,10 +18,10 @@
                     <th>Vitórias</th>
                     <th>Empates</th>
                     <th>Derrotas</th>
-                    <th>Pontos</th>
                     <th>GP</th>
                     <th>GC</th>
                     <th>SG</th>
+                    <th>Pontos</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,10 +64,6 @@
                     lost.textContent = team.lost;
                     row.appendChild(lost);
 
-                    const points = document.createElement('td');
-                    points.textContent = team.points;
-                    row.appendChild(points);
-
                     const goalsFor = document.createElement('td');
                     goalsFor.textContent = team.goalsFor;
                     row.appendChild(goalsFor);
@@ -79,6 +75,10 @@
                     const goalDifference = document.createElement('td');
                     goalDifference.textContent = team.goalDifference;
                     row.appendChild(goalDifference);
+
+                    const points = document.createElement('td');
+                    points.textContent = team.points;
+                    row.appendChild(points);
 
                     tbody.appendChild(row);
                 });
