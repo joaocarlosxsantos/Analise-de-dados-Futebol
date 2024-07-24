@@ -45,7 +45,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('../api/standings.js')
+            fetch('/api/standings')
             .then(response => response.json())
             .then(data => {
                 const standings = data.standings[0].table;
