@@ -1,7 +1,8 @@
-const express = require('express');
-const fetch = require('node-fetch');
+import express from 'express';
+import fetch from 'node-fetch';
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;  // Vercel irá definir automaticamente a porta
 
 const apiUrl = 'https://api.football-data.org/v4/competitions/BSA/standings?season=2024';
 const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
@@ -26,6 +27,14 @@ app.get('/standings', async (req, res) => {
         console.error('Error fetching data:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+// Servir arquivos estáticos da pasta 'public'
+app.use(express.static('public'));
+
+// Rota para servir o arquivo 'index.html'
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.listen(port, () => {

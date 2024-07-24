@@ -2,19 +2,16 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/standings.js",
+        "src": "server.js",
         "use": "@vercel/node"
       },
       {
-        "src": "index.html",
+        "src": "public/**",
         "use": "@vercel/static"
       }
     ],
     "routes": [
-      {
-        "src": "/api/standings",
-        "dest": "/api/standings.js"
-      }
+      { "src": "/(.*)", "dest": "/server.js" }
     ]
   }
   
