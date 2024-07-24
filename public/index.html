@@ -16,6 +16,7 @@
                     <th></th>
                     <th>Equipe</th>
                     <th>Histórico</th>
+                    <th>Pontos</th>
                     <th>J</th>
                     <th>V</th>
                     <th>E</th>
@@ -23,7 +24,6 @@
                     <th>GP</th>
                     <th>GC</th>
                     <th>SG</th>
-                    <th>Pontos</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +72,10 @@
                     form.innerHTML = generateFormDots(team.form);
                     row.appendChild(form);
 
+                    const points = document.createElement('td');
+                    points.textContent = team.points;
+                    row.appendChild(points);
+
                     const playedGames = document.createElement('td');
                     playedGames.textContent = team.playedGames;
                     row.appendChild(playedGames);
@@ -101,9 +105,7 @@
                     row.appendChild(goalDifference);
 
 
-                    const points = document.createElement('td');
-                    points.textContent = team.points;
-                    row.appendChild(points);
+                    
 
                     tbody.appendChild(row);
                 });
