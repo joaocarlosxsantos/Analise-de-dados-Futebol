@@ -34,21 +34,8 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('./api/last-3-days')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'last-3-days-list'));
 
-            fetch('./api/today')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'today-list'));
-
-            fetch('./api/next-3-days')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'next-3-days-list'));
-        });
-
-        function renderGames(data, elementId) {
+function renderGames(data, elementId) {
             const gamesList = document.getElementById(elementId);
             gamesList.innerHTML = '';
 
@@ -75,6 +62,22 @@
                 gamesList.appendChild(card);
             });
         }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/api/last-3-days')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'last-3-days-list'));
+
+            fetch('/api/today')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'today-list'));
+
+            fetch('/api/next-3-days')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'next-3-days-list'));
+        });
+
+        
     </script>
 </body>
 </html>
