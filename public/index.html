@@ -21,6 +21,7 @@
                     <th>GP</th>
                     <th>GC</th>
                     <th>SG</th>
+                    <th>Histórico</th>
                     <th>Pontos</th>
                 </tr>
             </thead>
@@ -75,6 +76,10 @@
                     const goalDifference = document.createElement('td');
                     goalDifference.textContent = team.goalDifference;
                     row.appendChild(goalDifference);
+
+                    const form = document.createElement('td');
+                    form.textContent = team.form;
+                    row.appendChild(form);
 
                     const points = document.createElement('td');
                     points.textContent = team.points;
