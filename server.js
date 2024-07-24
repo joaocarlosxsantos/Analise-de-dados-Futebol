@@ -40,9 +40,6 @@ app.get('/', (req, res) => {
 
 app.get('/games.html', (req, res) => {
     res.sendFile(__dirname + '/public/games.html');
-    app.get('/api/last-3-days', getLast3DaysMatches);
-    app.get('/api/today', getTodayMatches);
-    app.get('/api/next-3-days', getNext3DaysMatches);
 });
 
 app.listen(port, () => {

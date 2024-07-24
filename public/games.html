@@ -35,15 +35,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('/api/last-3-days')
+            fetch('./api/last-3-days')
                 .then(response => response.json())
                 .then(data => renderGames(data, 'last-3-days-list'));
 
-            fetch('/api/today')
+            fetch('./api/today')
                 .then(response => response.json())
                 .then(data => renderGames(data, 'today-list'));
 
-            fetch('/api/next-3-days')
+            fetch('./api/next-3-days')
                 .then(response => response.json())
                 .then(data => renderGames(data, 'next-3-days-list'));
         });
