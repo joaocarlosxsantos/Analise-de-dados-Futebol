@@ -17,9 +17,9 @@
         </nav>
         <h1>Jogos Brasileirão Série A 2024</h1>
         
-        <section id="last-3-days">
+        <section id="last">
             <h2>Jogos dos Últimos 3 Dias</h2>
-            <div class="games-list" id="last-3-days-list"></div>
+            <div class="games-list" id="last-list"></div>
         </section>
         
         <section id="today">
@@ -27,17 +27,17 @@
             <div class="games-list" id="today-list"></div>
         </section>
         
-        <section id="next-3-days">
+        <section id="next">
             <h2>Jogos dos Próximos 3 Dias</h2>
-            <div class="games-list" id="next-3-days-list"></div>
+            <div class="games-list" id="next-list"></div>
         </section>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('/api/last-3-days')
+            fetch('/api/last')
                 .then(response => response.json())
-                .then(data => renderGames(data, 'last-3-days-list'))
+                .then(data => renderGames(data, 'last-list'))
                 .catch(error => console.error('Error loading last 3 days games:', error));
 
             fetch('/api/today')
@@ -45,9 +45,9 @@
                 .then(data => renderGames(data, 'today-list'))
                 .catch(error => console.error('Error loading today\'s games:', error));
 
-            fetch('/api/next-3-days')
+            fetch('/api/next')
                 .then(response => response.json())
-                .then(data => renderGames(data, 'next-3-days-list'))
+                .then(data => renderGames(data, 'next-list'))
                 .catch(error => console.error('Error loading next 3 days games:', error));
         });
 
