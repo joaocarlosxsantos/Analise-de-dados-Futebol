@@ -1,7 +1,7 @@
 import express from 'express';
-import { getLast3DaysMatches } from './api/last-3-days.js';
+import { getLast3DaysMatches } from './api/last.js';
 import { getTodayMatches } from './api/today.js';
-import { getNext3DaysMatches } from './api/next-3-days.js';
+import { getNext3DaysMatches } from './api/next.js';
 
 const app = express();
 const port = process.env.PORT || 3000;  // Vercel irá definir automaticamente a porta
@@ -29,7 +29,7 @@ app.get('/api/standings', async (req, res) => {
     }
 });
 
-app.get('/api/last-3-days', async (req, res) => {
+app.get('/api/last', async (req, res) => {
     try {
         const response = await fetch('https://api.football-data.org/v4/competitions/BSA/matches?dateFrom=2024-07-21&dateTo=2024-07-23&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED', {
             headers: {
@@ -59,7 +59,7 @@ app.get('/api/today', async (req, res) => {
     }
 });
 
-app.get('/api/next-3-days', async (req, res) => {
+app.get('/api/next', async (req, res) => {
     try {
         const response = await fetch('https://api.football-data.org/v4/competitions/BSA/matches?dateFrom=2024-07-25&dateTo=2024-07-27&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED', {
             headers: {

@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/last-3-days.js",
+      "src": "api/last.js",
       "use": "@vercel/node"
     },
     {
@@ -14,7 +14,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/next-3-days.js",
+      "src": "api/next.js",
       "use": "@vercel/node"
     },
     {
@@ -24,9 +24,9 @@
   ],
   "routes": [
     { "src": "/api/standings", "dest": "/api/standings.js" },
-    { "src": "/api/last-3-days", "dest": "/api/last-3-days.js" },
+    { "src": "/api/last", "dest": "/api/last.js" },
     { "src": "/api/today", "dest": "/api/today.js" },
-    { "src": "/api/next-3-days", "dest": "/api/next-3-days.js" },
+    { "src": "/api/next", "dest": "/api/next.js" },
     { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
