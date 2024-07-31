@@ -13,7 +13,7 @@ export default async function (req, res) {
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {
-        console.error('Error fetching las 3 days match:', error);
+        console.error('Error fetching last 3 days match:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
