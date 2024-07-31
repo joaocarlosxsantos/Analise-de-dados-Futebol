@@ -42,10 +42,10 @@
                 .then(data => renderGames(data, 'last-list'))
                 .catch(error => console.error('Error loading last 3 days games:', error));
 
-            fetch('/api/today')
+            fetch('/api/today?matchday=22')
                 .then(response => response.json())
                 .then(data => renderGames(data, 'today-list'))
-                .catch(error => console.error('Error loading today\'s games:', error));
+                .catch(error => console.error('Error loading todays games:', error));
 
             fetch('/api/next')
                 .then(response => response.json())
