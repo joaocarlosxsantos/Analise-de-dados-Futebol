@@ -205,4 +205,14 @@ section {
     .columns {
         flex-direction: column;
     }
+    .team{
+        font-size: 11px;
+    }
+    .team-crest{
+        width: 30px;
+    }
+    .score{
+        font-size: 15px;
+    }
+
 }
