@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 const apiUrl = 'https://api.football-data.org/v4/competitions?areas=2032';
 const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
 
-export  async function getCurrentMatchday(req, res) {
+export default async function(req, res) {
     try {
         const response = await fetch(apiUrl, {
             headers: {
