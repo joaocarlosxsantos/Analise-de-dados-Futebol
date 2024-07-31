@@ -65,15 +65,17 @@
                 homeTeam.className = 'team';
                 homeTeam.innerHTML = `<img src="${match.homeTeam.crest}" alt="${match.homeTeam.name} crest" class="team-crest"> ${match.homeTeam.name}`;
 
-                const awayTeam = document.createElement('div');
-                awayTeam.className = 'team';
-                awayTeam.innerHTML = `<img src="${match.awayTeam.crest}" alt="${match.awayTeam.name} crest" class="team-crest"> ${match.awayTeam.name}`;
-
                 const score = document.createElement('div');
                 score.className = 'score';
                 score.textContent = match.score.fullTime.home !== null && match.score.fullTime.away !== null
                     ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
                     : 'Em andamento';
+
+                const awayTeam = document.createElement('div');
+                awayTeam.className = 'team';
+                awayTeam.innerHTML = `<img src="${match.awayTeam.crest}" alt="${match.awayTeam.name} crest" class="team-crest"> ${match.awayTeam.name}`;
+
+                
 
                 card.appendChild(homeTeam);
                 card.appendChild(awayTeam);
