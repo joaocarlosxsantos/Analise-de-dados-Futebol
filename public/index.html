@@ -61,80 +61,100 @@
     </div>
 
     <script>
-        // Script para carregar a tabela
         document.addEventListener('DOMContentLoaded', () => {
+            // Carregar Tabela
             fetch('/api/standings')
                 .then(response => response.json())
                 .then(data => {
-                    const standings = data.standings[0].table;
-                    const tbody = document.querySelector('#standings-table tbody');
+                    if (data && data.standings && data.standings[0] && data.standings[0].table) {
+                        const standings = data.standings[0].table;
+                        const tbody = document.querySelector('#standings-table tbody');
 
-                    standings.forEach(team => {
-                        const row = document.createElement('tr');
+                        standings.forEach(team => {
+                            const row = document.createElement('tr');
 
-                        const position = document.createElement('td');
-                        position.textContent = team.position;
-                        row.appendChild(position);
+                            const position = document.createElement('td');
+                            position.textContent = team.position;
+                            row.appendChild(position);
 
-                        const nameCell = document.createElement('td');
+                            const nameCell = document.createElement('td');
 
-                        const crestImg = document.createElement('img');
-                        crestImg.src = team.team.crest;
-                        crestImg.alt = `${team.team.shortName} crest`;
-                        crestImg.style.width = '20px';
-                        crestImg.style.height = 'auto';
+                            const crestImg = document.createElement('img');
+                            crestImg.src = team.team.crest;
+                            crestImg.alt = `${team.team.shortName} crest`;
+                            crestImg.style.width = '20px';
+                            crestImg.style.height = 'auto';
 
-                        const nameSpan = document.createElement('span');
-                        nameSpan.textContent = team.team.tla;
-                        nameSpan.style.marginLeft = '8px';
+                            const nameSpan = document.createElement('span');
+                            nameSpan.textContent = team.team.tla;
+                            nameSpan.style.marginLeft = '8px';
 
-                        nameCell.appendChild(crestImg);
-                        nameCell.appendChild(nameSpan);
+                            nameCell.appendChild(crestImg);
+                            nameCell.appendChild(nameSpan);
 
-                        row.appendChild(nameCell);
+                            row.appendChild(nameCell);
 
-                        const form = document.createElement('td');
-                        form.innerHTML = generateFormDots(team.form);
-                        row.appendChild(form);
+                            const form = document.createElement('td');
+                            form.innerHTML = generateFormDots(team.form);
+                            row.appendChild(form);
 
-                        const points = document.createElement('td');
-                        points.textContent = team.points;
-                        row.appendChild(points);
+                            const points = document.createElement('td');
+                            points.textContent = team.points;
+                            row.appendChild(points);
 
-                        const playedGames = document.createElement('td');
-                        playedGames.textContent = team.playedGames;
-                        row.appendChild(playedGames);
+                            const playedGames = document.createElement('td');
+                            playedGames.textContent = team.playedGames;
+                            row.appendChild(playedGames);
 
-                        const won = document.createElement('td');
-                        won.textContent = team.won;
-                        row.appendChild(won);
+                            const won = document.createElement('td');
+                            won.textContent = team.won;
+                            row.appendChild(won);
 
-                        const draw = document.createElement('td');
-                        draw.textContent = team.draw;
-                        row.appendChild(draw);
+                            const draw = document.createElement('td');
+                            draw.textContent = team.draw;
+                            row.appendChild(draw);
 
-                        const lost = document.createElement('td');
-                        lost.textContent = team.lost;
-                        row.appendChild(lost);
+                            const lost = document.createElement('td');
+                            lost.textContent = team.lost;
+                            row.appendChild(lost);
 
-                        const goalsFor = document.createElement('td');
-                        goalsFor.textContent = team.goalsFor;
-                        row.appendChild(goalsFor);
+                            const goalsFor = document.createElement('td');
+                            goalsFor.textContent = team.goalsFor;
+                            row.appendChild(goalsFor);
 
-                        const goalsAgainst = document.createElement('td');
-                        goalsAgainst.textContent = team.goalsAgainst;
-                        row.appendChild(goalsAgainst);
+                            const goalsAgainst = document.createElement('td');
+                            goalsAgainst.textContent = team.goalsAgainst;
+                            row.appendChild(goalsAgainst);
 
-                        const goalDifference = document.createElement('td');
-                        goalDifference.textContent = team.goalDifference;
-                        row.appendChild(goalDifference);
+                            const goalDifference = document.createElement('td');
+                            goalDifference.textContent = team.goalDifference;
+                            row.appendChild(goalDifference);
 
-                        tbody.appendChild(row);
-                    });
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        console.error('Unexpected API response structure for standings.');
+                    }
                 })
                 .catch(error => {
-                    console.error('Error fetching data:', error);
+                    console.error('Error fetching standings data:', error);
                 });
+
+            // Carregar Jogos
+            fetch('/api/last')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'last-list'))
+                .catch(error => console.error('Error loading last 3 days games:', error));
+
+            fetch('/api/today')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'today-list'))
+                .catch(error => console.error('Error loading today\'s games:', error));
+
+            fetch('/api/next')
+                .then(response => response.json())
+                .then(data => renderGames(data, 'next-list'))
+                .catch(error => console.error('Error loading next 3 days games:', error));
         });
 
         function generateFormDots(form) {
@@ -150,52 +170,38 @@
             }).join(' ');
         }
 
-        // Script para carregar os jogos
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('/api/last')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'last-list'))
-                .catch(error => console.error('Error loading last 3 days games:', error));
-
-            fetch('/api/today')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'today-list'))
-                .catch(error => console.error('Error loading todays games:', error));
-
-            fetch('/api/next')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'next-list'))
-                .catch(error => console.error('Error loading next 3 days games:', error));
-        });
-
         function renderGames(data, elementId) {
             const gamesList = document.getElementById(elementId);
             gamesList.innerHTML = '';
 
-            data.matches.forEach(match => {
-                const card = document.createElement('div');
-                card.className = 'game-card';
+            if (data && data.matches) {
+                data.matches.forEach(match => {
+                    const card = document.createElement('div');
+                    card.className = 'game-card';
 
-                const homeTeam = document.createElement('div');
-                homeTeam.className = 'team';
-                homeTeam.innerHTML = `<img src="${match.homeTeam.crest}" alt="${match.homeTeam.name} crest" class="team-crest"> ${match.homeTeam.tla}`;
+                    const homeTeam = document.createElement('div');
+                    homeTeam.className = 'team';
+                    homeTeam.innerHTML = `<img src="${match.homeTeam.crest}" alt="${match.homeTeam.name} crest" class="team-crest"> ${match.homeTeam.tla}`;
 
-                const score = document.createElement('div');
-                score.className = 'score';
-                score.textContent = match.score.fullTime.home !== null && match.score.fullTime.away !== null
-                    ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
-                    : 'X';
+                    const score = document.createElement('div');
+                    score.className = 'score';
+                    score.textContent = match.score.fullTime.home !== null && match.score.fullTime.away !== null
+                        ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
+                        : 'X';
 
-                const awayTeam = document.createElement('div');
-                awayTeam.className = 'team';
-                awayTeam.innerHTML = `<img src="${match.awayTeam.crest}" alt="${match.awayTeam.name} crest" class="team-crest"> ${match.awayTeam.tla}`;
+                    const awayTeam = document.createElement('div');
+                    awayTeam.className = 'team';
+                    awayTeam.innerHTML = `<img src="${match.awayTeam.crest}" alt="${match.awayTeam.name} crest" class="team-crest"> ${match.awayTeam.tla}`;
 
-                card.appendChild(homeTeam);
-                card.appendChild(score);
-                card.appendChild(awayTeam);
+                    card.appendChild(homeTeam);
+                    card.appendChild(score);
+                    card.appendChild(awayTeam);
 
-                gamesList.appendChild(card);
-            });
+                    gamesList.appendChild(card);
+                });
+            } else {
+                console.error('Unexpected API response structure for games.');
+            }
         }
     </script>
 </body>

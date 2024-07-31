@@ -62,9 +62,6 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/games.html', (req, res) => {
-    res.sendFile(__dirname + '/public/games.html');
-});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
