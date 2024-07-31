@@ -42,7 +42,7 @@ app.get('/api/today', async (req, res) => {
     try {
         getTodayMatches
     } catch (error) {
-        console.error('Error fetching today\'s matches:', error);
+        console.error('Error fetching todays matches:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
