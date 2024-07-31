@@ -19,22 +19,15 @@ export default async function (req, res) {
     const apiUrl = `https://api.football-data.org/v4/competitions/BSA/matches?dateFrom=${todayFormatted}&dateTo=${todayFormatted}&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED`;
 
     try {
-        console.log(`Fetching data from URL: ${apiUrl}`); // Log para verificar a URL
-
         const response = await fetch(apiUrl, {
             headers: {
                 'X-Auth-Token': apiKey
             }
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {
-        console.error('Error fetching matches of today:', error.message);
+        console.error('Error fetching matches of today:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
