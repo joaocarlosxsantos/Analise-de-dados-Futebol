@@ -69,7 +69,7 @@
                 score.className = 'score';
                 score.textContent = match.score.fullTime.home !== null && match.score.fullTime.away !== null
                     ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
-                    : 'Em andamento';
+                    : '';
 
                 const awayTeam = document.createElement('div');
                 awayTeam.className = 'team';
