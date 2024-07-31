@@ -1,3 +1,4 @@
+/* style.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -13,6 +14,7 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
 }
 
 nav {
@@ -49,25 +51,52 @@ h1 {
     margin-bottom: 20px;
 }
 
-section h2 {
-    color: #004d61;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
     text-align: center;
-    margin-bottom: 10px;
 }
 
-.columns {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+th {
+    background-color: #004d61;
+    color: #fff;
+    text-transform: uppercase;
 }
 
-section {
-    flex: 1;
+tr:nth-child(even) {
     background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td {
+    text-align: center;
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+td:nth-child(4) {
+    font-weight: bold;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 2px;
+}
+
 
 .game-card {
     background-color: #fff;
@@ -78,7 +107,6 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .team {
@@ -101,6 +129,26 @@ section {
 .games-list {
     display: flex;
     flex-direction: column;
+}
+
+section h2 {
+    color: #004d61;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 1024px) {
@@ -136,6 +184,7 @@ section {
         padding: 8px;
     }
 }
+
 
 @media (max-width: 480px) {
     h1 {
