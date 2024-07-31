@@ -31,13 +31,7 @@ app.get('/api/standings', async (req, res) => {
 
 app.get('/api/last', async (req, res) => {
     try {
-        const response = await fetch('https://api.football-data.org/v4/competitions/BSA/matches?dateFrom=2024-07-21&dateTo=2024-07-23&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED', {
-            headers: {
-                'X-Auth-Token': '0375969d79f74b60a0a9d73904aa1ee1'
-            }
-        });
-        const data = await response.json();
-        res.json(data);
+        getLast3DaysMatches
     } catch (error) {
         console.error('Error fetching last 3 days matches:', error);
         res.status(500).json({ error: 'Internal Server Error' });
