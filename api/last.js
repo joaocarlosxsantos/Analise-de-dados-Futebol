@@ -18,7 +18,7 @@ async function getLastMatchday() {
 
         const data = await response.json();
         const currentMatchday = data.competitions[0].currentSeason.currentMatchday;
-        const lastMatchday = currentMatchday+1
+        const lastMatchday = currentMatchday-1
         return lastMatchday;
     } catch (error) {
         console.error('Error fetching current matchday:', error);
