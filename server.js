@@ -2,7 +2,6 @@ import express from 'express';
 import { getLast3DaysMatches } from './api/last.js';
 import { getTodayMatches } from './api/today.js';
 import { getNext3DaysMatches } from './api/next.js';
-import { getrodadaatual } from './api/rodadaatual.js';
 
 const app = express();
 const port = process.env.PORT || 3000;  // Vercel irá definir automaticamente a porta
@@ -53,15 +52,6 @@ app.get('/api/next', async (req, res) => {
         getNext3DaysMatches
     } catch (error) {
         console.error('Error fetching next 3 days matches:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-app.get('/api/rodadaatual', async (req, res) => {
-    try {
-        getrodadaatual
-    } catch (error) {
-        console.error('Error fetching rodadaatual:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
