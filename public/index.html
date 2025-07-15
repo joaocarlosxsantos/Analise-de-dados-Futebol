@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futebol Brasileirão Série A 2024</title>
+    <title>Futebol Brasileirão Série A 2025</title>
     <link rel="icon" href="/images/icon.png" type="image/png">
     <link rel="stylesheet" href="/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <button class="toggle-dark" id="toggle-dark" title="Alternar modo escuro/claro">🌙</button>
     <div class="container">
         <nav>
             <ul>
-                <li><a href="#tabela">Tabela</a></li>
+                <li><a href="#tabela" class="active">Tabela</a></li>
                 <li><a href="#jogos">Jogos</a></li>
             </ul>
         </nav>
 
         <!-- Seção da Tabela -->
         <section id="tabela">
-            <h1>Brasileirão Série A 2024</h1>
+            <h1>Brasileirão Série A 2025</h1>
+            <div id="loading-table" style="text-align:center; margin: 20px 0; display:none;">Carregando tabela...</div>
             <table id="standings-table">
                 <thead>
                     <tr>
@@ -42,18 +45,20 @@
 
         <!-- Seção dos Jogos -->
         <section id="jogos">
-             <!-- <h1>Jogos</h1> -->
             <div class="columns">
                 <section id="last">
                     <h2>Última rodada</h2>
+                    <div id="loading-last" style="text-align:center; margin: 10px 0; display:none;">Carregando jogos...</div>
                     <div class="games-list" id="last-list"></div>
                 </section>
                 <section id="today">
                     <h2>Rodada Atual</h2>
+                    <div id="loading-today" style="text-align:center; margin: 10px 0; display:none;">Carregando jogos...</div>
                     <div class="games-list" id="today-list"></div>
                 </section>
                 <section id="next">
                     <h2>Próxima Rodada</h2>
+                    <div id="loading-next" style="text-align:center; margin: 10px 0; display:none;">Carregando jogos...</div>
                     <div class="games-list" id="next-list"></div>
                 </section>
             </div>
@@ -61,15 +66,43 @@
     </div>
 
     <script>
+        // Alternância de modo escuro
+        const toggleDark = document.getElementById('toggle-dark');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDark)) {
+            document.body.classList.add('dark-mode');
+            toggleDark.textContent = '☀️';
+        }
+        toggleDark.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                toggleDark.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                toggleDark.textContent = '🌙';
+            }
+        });
+
+        // Navegação ativa
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             // Carregar Tabela
+            document.getElementById('loading-table').style.display = 'block';
             fetch('/api/standings')
                 .then(response => response.json())
                 .then(data => {
+                    document.getElementById('loading-table').style.display = 'none';
                     if (data && data.standings && data.standings[0] && data.standings[0].table) {
                         const standings = data.standings[0].table;
                         const tbody = document.querySelector('#standings-table tbody');
-
+                        tbody.innerHTML = '';
                         standings.forEach(team => {
                             const row = document.createElement('tr');
 
@@ -78,20 +111,15 @@
                             row.appendChild(position);
 
                             const nameCell = document.createElement('td');
-
                             const crestImg = document.createElement('img');
                             crestImg.src = team.team.crest;
                             crestImg.alt = `${team.team.shortName} crest`;
-                            crestImg.style.width = '20px';
-                            crestImg.style.height = 'auto';
-
+                            crestImg.className = 'team-crest';
                             const nameSpan = document.createElement('span');
                             nameSpan.textContent = team.team.tla;
                             nameSpan.style.marginLeft = '8px';
-
                             nameCell.appendChild(crestImg);
                             nameCell.appendChild(nameSpan);
-
                             row.appendChild(nameCell);
 
                             const form = document.createElement('td');
@@ -133,28 +161,19 @@
                             tbody.appendChild(row);
                         });
                     } else {
-                        console.error('Unexpected API response structure for standings.');
+                        console.error('Estrutura inesperada da resposta da API para standings.');
                     }
                 })
                 .catch(error => {
-                    console.error('Error fetching standings data:', error);
+                    document.getElementById('loading-table').style.display = 'none';
+                    alert('Erro ao buscar dados da tabela. Tente novamente mais tarde.');
+                    console.error('Erro ao buscar dados da tabela:', error);
                 });
 
             // Carregar Jogos
-            fetch('/api/last')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'last-list'))
-                .catch(error => console.error('Error loading last 3 days games:', error));
-
-            fetch('/api/today')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'today-list'))
-                .catch(error => console.error('Error loading today\'s games:', error));
-
-            fetch('/api/next')
-                .then(response => response.json())
-                .then(data => renderGames(data, 'next-list'))
-                .catch(error => console.error('Error loading next 3 days games:', error));
+            carregarJogos('/api/last', 'last-list', 'loading-last');
+            carregarJogos('/api/today', 'today-list', 'loading-today');
+            carregarJogos('/api/next', 'next-list', 'loading-next');
         });
 
         function generateFormDots(form) {
@@ -163,18 +182,40 @@
                 'L': 'red',
                 'D': 'gray'
             };
-
             return form.split(',').map(char => {
                 const color = colors[char.trim()];
                 return color ? `<span class="dot" style="background-color: ${color};"></span>` : '';
             }).join(' ');
         }
 
-        function renderGames(data, elementId) {
+        function carregarJogos(api, elementId, loadingId) {
+            document.getElementById(loadingId).style.display = 'block';
+            fetch(api)
+                .then(response => {
+                    document.getElementById(loadingId).style.display = 'none';
+                    if (response.status === 204) {
+                        renderGames({ matches: [] }, elementId, true);
+                        return;
+                    }
+                    return response.json().then(data => {
+                        renderGames(data, elementId);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById(loadingId).style.display = 'none';
+                    alert('Erro ao carregar jogos. Tente novamente mais tarde.');
+                    console.error('Erro ao carregar jogos:', error);
+                });
+        }
+
+        function renderGames(data, elementId, semRodada) {
             const gamesList = document.getElementById(elementId);
             gamesList.innerHTML = '';
-
-            if (data && data.matches) {
+            if (semRodada) {
+                gamesList.innerHTML = '<div style="text-align:center; color:#888;">Nenhuma rodada disponível para esta temporada.</div>';
+                return;
+            }
+            if (data && data.matches && data.matches.length > 0) {
                 data.matches.forEach(match => {
                     const card = document.createElement('div');
                     card.className = 'game-card';
@@ -200,7 +241,8 @@
                     gamesList.appendChild(card);
                 });
             } else {
-                console.error('Unexpected API response structure for games.');
+                gamesList.innerHTML = '<div style="text-align:center; color:#888;">Nenhum jogo encontrado.</div>';
+                console.error('Estrutura inesperada da resposta da API para jogos.');
             }
         }
     </script>

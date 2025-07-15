@@ -18,6 +18,9 @@ async function getNextMatchday() {
 
         const data = await response.json();
         const currentMatchday = data.competitions[0].currentSeason.currentMatchday;
+        if (!currentMatchday) {
+            return res.status(204).json({ message: 'Nenhuma rodada disponível para esta temporada.' });
+        }
         const nextMatchday = currentMatchday+1
         return nextMatchday;
     } catch (error) {
@@ -33,7 +36,7 @@ export default async function (req, res) {
         const matchday = await getNextMatchday();
 
         // Construir a URL com o matchday obtido
-        const apiUrl = `https://api.football-data.org/v4/competitions/BSA/matches?matchday=${matchday}&season=2024&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED`;
+        const apiUrl = `https://api.football-data.org/v4/competitions/BSA/matches?matchday=${matchday}&season=2025&status=TIMED,SCHEDULED,LIVE,IN_PLAY,PAUSED,FINISHED`;
         const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
 
         // Fazer a requisição para obter os jogos

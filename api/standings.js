@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const apiUrl = 'https://api.football-data.org/v4/competitions/BSA/standings?season=2024';
+const apiUrl = 'https://api.football-data.org/v4/competitions/BSA/standings?season=2025';
 const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
 
 export default async function (req, res) {

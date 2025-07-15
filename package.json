@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "dependencies": {
-    "express": "^4.19.2",
-    "node-fetch": "^2.7.0"
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
   },
   "name": "analisededadosfutebol",
   "version": "1.0.0",
