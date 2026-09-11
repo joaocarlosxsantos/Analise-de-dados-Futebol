@@ -93,9 +93,10 @@ body.dark-mode {
     top: 0;
     z-index: 100;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 10px 16px;
     padding: 14px 22px;
     margin-bottom: 28px;
     background: linear-gradient(135deg, var(--pitch-800), var(--pitch-700) 55%, var(--pitch-600));
@@ -111,6 +112,7 @@ body.dark-mode .site-header {
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    order: 1;
 }
 .brand-badge {
     width: 34px;
@@ -146,8 +148,10 @@ body.dark-mode .site-header {
     position: static;
     border-radius: 0;
     display: flex;
-    flex: 1;
+    flex: 1 1 auto;
     justify-content: flex-end;
+    order: 2;
+    min-width: 0;
 }
 nav ul {
     list-style-type: none;
@@ -183,9 +187,8 @@ nav ul li a.active {
 }
 
 .toggle-dark {
-    position: fixed;
-    right: 20px;
-    top: 16px;
+    order: 3;
+    flex-shrink: 0;
     background: var(--card);
     color: var(--pitch-700);
     border: 2px solid var(--gold-500);
@@ -199,7 +202,6 @@ nav ul li a.active {
     align-items: center;
     justify-content: center;
     transition: transform 0.2s, background 0.3s, color 0.3s;
-    z-index: 200;
     outline: none;
 }
 .toggle-dark:hover {
@@ -767,12 +769,18 @@ body.dark-mode .bracket-team--winner {
 }
 @media (max-width: 768px) {
     .site-header {
-        flex-wrap: wrap;
         padding: 12px 14px;
     }
     .site-header nav {
+        order: 3;
         justify-content: flex-start;
         width: 100%;
+    }
+    .toggle-dark {
+        order: 2;
+        width: 34px;
+        height: 34px;
+        font-size: 1.05em;
     }
     .hero {
         padding: 26px 16px;
@@ -792,12 +800,6 @@ body.dark-mode .bracket-team--winner {
     th, td {
         padding: 8px 6px;
     }
-    .toggle-dark {
-        right: 10px;
-        top: 10px;
-        width: 34px;
-        height: 34px;
-    }
     .game-card {
         padding: 10px;
     }
@@ -811,6 +813,12 @@ body.dark-mode .bracket-team--winner {
     }
     .club-header {
         font-size: 1.15em;
+        gap: 10px;
+        padding: 12px;
+    }
+    .club-header .team-crest {
+        width: 38px;
+        height: 38px;
     }
 }
 @media (max-width: 480px) {
@@ -840,5 +848,18 @@ body.dark-mode .bracket-team--winner {
     nav ul li a {
         padding: 6px 11px;
         font-size: 0.88em;
+    }
+    .toggle-dark {
+        width: 30px;
+        height: 30px;
+        font-size: 0.95em;
+    }
+    .club-header {
+        font-size: 1em;
+        flex-wrap: wrap;
+    }
+    .club-header .team-crest {
+        width: 32px;
+        height: 32px;
     }
 }
