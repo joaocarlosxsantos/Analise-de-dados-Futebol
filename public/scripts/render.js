@@ -115,12 +115,17 @@ function renderGamesList(matches, container, emptyMessage) {
         homeTeam.className = 'team';
         homeTeam.innerHTML = `<img src="${match.home.logo}" alt="${match.home.name}" class="team-crest"> ${match.home.name}`;
 
-        const score = document.createElement('div');
-        score.className = 'score';
+        const liveStatuses = ['IN_PLAY', 'PAUSED', 'LIVE'];
         const hasScore = match.goals && match.goals.home !== null && match.goals.away !== null;
-        score.textContent = hasScore
-            ? `${match.goals.home} - ${match.goals.away}`
-            : formatDateTime(match.date) || 'A definir';
+        const isLive = liveStatuses.includes(match.status);
+
+        const score = document.createElement('div');
+        score.className = `score${isLive ? ' is-live' : !hasScore ? ' is-scheduled' : ''}`;
+        score.textContent = isLive
+            ? `${match.goals.home ?? 0} - ${match.goals.away ?? 0}`
+            : hasScore
+                ? `${match.goals.home} - ${match.goals.away}`
+                : formatDateTime(match.date) || 'A definir';
 
         const awayTeam = document.createElement('div');
         awayTeam.className = 'team';

@@ -6,11 +6,24 @@
     <title>Futebol Brasileirão Série A</title>
     <link rel="icon" href="/images/icon.png" type="image/png">
     <link rel="stylesheet" href="/styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <button class="toggle-dark" id="toggle-dark" title="Alternar modo escuro/claro">🌙</button>
-    <div class="container">
+
+    <header class="site-header">
+        <div class="brand">
+            <span class="brand-badge" aria-hidden="true">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="30" fill="#fff" stroke="#0e4c24" stroke-width="3"/>
+                    <path d="M32 16 L44 24 L39 38 L25 38 L20 24 Z" fill="#0e4c24"/>
+                    <path d="M32 4 L32 16 M4 32 L16 32 M32 60 L32 48 M60 32 L48 32" stroke="#0e4c24" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span class="brand-name">Futebol<strong>BR</strong></span>
+        </div>
         <nav>
             <ul>
                 <li><a href="#tabela" class="active">Tabela</a></li>
@@ -18,10 +31,19 @@
                 <li><a href="/clube.html">Meu Clube</a></li>
             </ul>
         </nav>
+    </header>
 
+    <div class="container">
         <!-- Seção da Tabela -->
         <section id="tabela">
-            <h1 id="titulo-tabela">Brasileirão Série A</h1>
+            <div class="hero">
+                <div class="hero-pitch" aria-hidden="true"></div>
+                <div class="hero-content">
+                    <span class="hero-eyebrow">Campeonato Brasileiro</span>
+                    <h1 id="titulo-tabela">Brasileirão Série A</h1>
+                </div>
+            </div>
+
             <div id="loading-table" class="status-box" style="display:none;">Carregando tabela...</div>
             <div id="table-message" class="status-box" style="display:none;"></div>
             <table id="standings-table" style="display:none;">
