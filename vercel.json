@@ -1,3 +1,5 @@
 {
-  "version": 2
+  "version": 2,
+  "installCommand": "npm install",
+  "buildCommand": "echo 'no build step needed'"
 }
