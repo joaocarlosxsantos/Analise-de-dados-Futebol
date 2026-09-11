@@ -1,19 +1,26 @@
-import fetch from 'node-fetch';
+// Tabela de classificação do Brasileirão Série A da temporada ATUAL.
+// A football-data.org já devolve a temporada corrente sozinha (sem
+// precisar fixar/calcular o ano), então o site atualiza a cada virada
+// de ano sem nenhum código extra.
 
-const apiUrl = 'https://api.football-data.org/v4/competitions/BSA/standings?season=2025';
-const apiKey = '0375969d79f74b60a0a9d73904aa1ee1';
+import { getBsaStandings, setCache } from '../lib/footballData.js';
 
-export default async function (req, res) {
+export default async function handler(req, res) {
     try {
-        const response = await fetch(apiUrl, {
-            headers: {
-                'X-Auth-Token': apiKey
-            }
-        });
-        const data = await response.json();
-        res.status(200).json(data);
+        const table = await getBsaStandings();
+
+        if (!table || table.length === 0) {
+            setCache(res, 3600);
+            return res.status(200).json({
+                started: false,
+                message: 'A temporada atual do Brasileirão ainda não começou.'
+            });
+        }
+
+        setCache(res, 1800, 3600);
+        res.status(200).json({ started: true, season: new Date().getFullYear(), table });
     } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Erro ao buscar tabela do Brasileirão:', error);
+        res.status(500).json({ error: 'Erro ao buscar a tabela do Brasileirão.' });
     }
 }

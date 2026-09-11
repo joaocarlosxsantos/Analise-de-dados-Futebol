@@ -1,18 +1,17 @@
 {
   "type": "module",
+  "name": "analisededadosfutebol",
+  "version": "2.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^5.1.0",
-    "node-fetch": "^3.3.2"
-  },
-  "name": "analisededadosfutebol",
-  "version": "1.0.0",
-  "main": "scripts.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "dotenv": "^16.4.5"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "Consulta de dados do futebol brasileiro (Brasileirão e campeonatos por clube), sem banco de dados, usando a API-Football."
 }

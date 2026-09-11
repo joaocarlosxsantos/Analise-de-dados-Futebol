@@ -1,32 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/standings.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/last.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/today.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/next.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/api/standings", "dest": "/api/standings.js" },
-    { "src": "/api/last", "dest": "/api/last.js" },
-    { "src": "/api/today", "dest": "/api/today.js" },
-    { "src": "/api/next", "dest": "/api/next.js" },
-    { "src": "/(.*)", "dest": "/public/$1" }
-  ]
+  "version": 2
 }

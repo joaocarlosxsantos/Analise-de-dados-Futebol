@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Clube — Futebol Brasileirão</title>
+    <link rel="icon" href="/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="toggle-dark" id="toggle-dark" title="Alternar modo escuro/claro">🌙</button>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="/index.html">Tabela</a></li>
+                <li><a href="/index.html#jogos">Jogos</a></li>
+                <li><a href="/clube.html" class="active">Meu Clube</a></li>
+            </ul>
+        </nav>
+
+        <h1>Meu Clube</h1>
+
+        <!-- View 1: busca de clube -->
+        <section id="view-busca" class="view">
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="team-search-input"
+                    placeholder="Digite o nome do seu clube (mín. 3 letras)..."
+                    autocomplete="off"
+                />
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+            <div id="search-status" class="status-box" style="display:none;"></div>
+        </section>
+
+        <!-- View 2: campeonatos do clube selecionado -->
+        <section id="view-campeonatos" class="view hidden">
+            <button class="back-button" id="btn-trocar-clube">&larr; Trocar de clube</button>
+            <div class="club-header" id="club-header"></div>
+            <div id="campeonatos-status" class="status-box" style="display:none;"></div>
+            <div id="campeonatos-grid" class="competitions-grid"></div>
+        </section>
+
+        <!-- View 3: detalhe do campeonato (tabela ou chaveamento + últimos/próximos jogos) -->
+        <section id="view-detalhe" class="view hidden">
+            <button class="back-button" id="btn-voltar-campeonatos">&larr; Campeonatos do clube</button>
+            <h2 id="detalhe-titulo"></h2>
+
+            <div id="detalhe-status" class="status-box" style="display:none;"></div>
+
+            <div id="detalhe-tabela-wrap" class="hidden">
+                <table id="detalhe-tabela">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Equipe</th>
+                            <th>Histórico</th>
+                            <th>Pontos</th>
+                            <th>J</th>
+                            <th>V</th>
+                            <th>E</th>
+                            <th>D</th>
+                            <th>GP</th>
+                            <th>GC</th>
+                            <th>SG</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="detalhe-chaveamento-wrap" class="hidden">
+                <div class="bracket-container" id="bracket-container"></div>
+            </div>
+
+            <div class="columns" id="detalhe-jogos-columns" style="margin-top: 24px;">
+                <section id="detalhe-last">
+                    <h2>Últimos 2 jogos</h2>
+                    <div class="games-list" id="detalhe-last-list"></div>
+                </section>
+                <section id="detalhe-next">
+                    <h2>Próximos 2 jogos</h2>
+                    <div class="games-list" id="detalhe-next-list"></div>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <script src="/scripts/theme.js"></script>
+    <script src="/scripts/render.js"></script>
+    <script src="/scripts/clube.js"></script>
+</body>
+</html>
