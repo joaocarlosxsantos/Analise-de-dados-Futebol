@@ -292,8 +292,18 @@ section > h1:not(.hero h1) {
 
 /* --- Tabela de classificação (placar oficial) --- */
 
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 32px;
+}
+.table-scroll table {
+    margin-bottom: 0;
+}
 table {
     width: 100%;
+    min-width: 620px;
     border-collapse: separate;
     border-spacing: 0;
     margin-bottom: 32px;
@@ -767,7 +777,7 @@ body.dark-mode .bracket-team--winner {
         font-size: 14px;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 860px) {
     .site-header {
         padding: 12px 14px;
     }
@@ -794,8 +804,7 @@ body.dark-mode .bracket-team--winner {
     }
     table {
         font-size: 13px;
-        overflow-x: auto;
-        display: block;
+        min-width: 560px;
     }
     th, td {
         padding: 8px 6px;
@@ -822,6 +831,9 @@ body.dark-mode .bracket-team--winner {
     }
 }
 @media (max-width: 480px) {
+    table {
+        min-width: 480px;
+    }
     table, th, td {
         font-size: 10.5px;
         padding: 5px 3px;
